@@ -1,0 +1,98 @@
+<?php
+
+require_once '../models/MarvelClient.php';
+require_once '../models/Character.php';
+
+$client = new MarvelClient();
+$goOut = false;
+
+while(!$goOut) {
+    printf("\n");
+    printf("marvel:characters\n");
+	printf("marvel:character <id>\n");
+    printf("marvel:character-comics <id>\n");
+    printf("marvel:comic <id>\n");
+    printf("marvel:comic-authors <id>\n");
+    printf("exit\n");
+    $option = readline("Select a option: \n");
+
+    if(str_word_count($option) == 2 ){
+        $option = explode(" ", $option);
+        $id = $option[1];
+        $option = $option[0];
+    }
+
+    switch($option) {
+        case "marvel:characters": 
+            $characters = $client->getCharacters();
+
+            foreach ($characters as $character) 
+            {
+                $thumbnail = $character['thumbnail']['path'] . $character['thumbnail']['extension'];
+                $charactersArray[] = new Character($character['name'], $character['description'], $thumbnail, $character['comics']);
+            }
+            getListOfCharacters($charactersArray);
+        break;
+
+        case "marvel:character":
+            $character = $client->getCharacter($id);
+
+            foreach ($character as $charact) 
+            {
+                $thumbnail = $charact['thumbnail']['path'] . $charact['thumbnail']['extension'];
+                $marvelCharacter = new Character($charact['name'], $charact['description'], $thumbnail, $charact['comics']);
+            }
+
+            getInformationOfCharacter($marvelCharacter);
+        break;
+
+        case "marvel:character-comics":
+            $characterComics = $client->getComicsForCharacter($id);
+
+            foreach ($characterComics as $characterComic) 
+            {
+                $thumbnail = $characterComic['thumbnail']['path'] . $characterComic['thumbnail']['extension'];
+                $author = $characterComic['creators']['items']['name'];
+                $comic = new Comic($characterComic['title'], $characterComic['description'], $thumbnail, $author);
+            }
+
+            getInformationOfCharacterComics($marvelCharacter);
+        break;
+
+        case "marvel:comic":
+        break;
+
+        case "marvel:comic-authors":
+        break;
+
+        case "exit": 
+            $goOut = true;
+        break;
+
+        
+    }
+}
+
+function getListOfCharacters($charactersArray)
+{
+    printf("\n");
+    printf("List of Marvel Characters: \n");
+    foreach ($charactersArray as $character) 
+    {
+        printf($character->getName() . "\n");
+    }
+    printf("\n");
+}
+
+function getInformationOfCharacter($marvelCharacter)
+{
+    printf("\n");
+    printf("Information about a Marvel character: \n");
+    printf("Name: " . $marvelCharacter->getName() . "\n");
+    printf("Description: " . $marvelCharacter->getDescription() . "\n");
+    printf("\n");
+}
+
+
+
+?>
