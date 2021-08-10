@@ -80,7 +80,7 @@ class MarvelClient{
 
         $creators = $response['data']['results'];
 
-        return var_dump($creators);
+        return $creators;
     }
 
 

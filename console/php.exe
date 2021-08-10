@@ -2,6 +2,7 @@
 
 require_once '../models/MarvelClient.php';
 require_once '../models/Character.php';
+require_once '../models/Author.php';
 
 $client = new MarvelClient();
 $goOut = false;
@@ -32,6 +33,8 @@ while(!$goOut) {
                 $charactersArray[] = new Character($character['name'], $character['description'], $thumbnail, $character['comics']);
             }
             getListOfCharacters($charactersArray);
+            unset($charactersArray);
+
         break;
 
         case "marvel:character":
@@ -42,8 +45,9 @@ while(!$goOut) {
                 $thumbnail = $charact['thumbnail']['path'] . $charact['thumbnail']['extension'];
                 $marvelCharacter = new Character($charact['name'], $charact['description'], $thumbnail, $charact['comics']);
             }
-
             getInformationOfCharacter($marvelCharacter);
+            unset($marvelCharacter);
+
         break;
 
         case "marvel:character-comics":
@@ -52,17 +56,44 @@ while(!$goOut) {
             foreach ($characterComics as $characterComic) 
             {
                 $thumbnail = $characterComic['thumbnail']['path'] . $characterComic['thumbnail']['extension'];
-                $author = $characterComic['creators']['items']['name'];
-                $comic = new Comic($characterComic['title'], $characterComic['description'], $thumbnail, $author);
-            }
+                $authors = $characterComic['creators']['items'];
 
-            getInformationOfCharacterComics($marvelCharacter);
+                if(is_null($characterComic['description'])) $characterComic['description'] = " ";
+
+                $comicsArray[] = new Comic($characterComic['title'], $characterComic['description'], $thumbnail, $authors);
+            }
+            getInformationOfCharacterComics($comicsArray);
+            unset($comicsArray);
+
         break;
 
         case "marvel:comic":
+            $characterComic = $client->getComic($id);
+
+            foreach ($characterComic as $comic) 
+            {
+                $thumbnail = $comic['thumbnail']['path'] . $comic['thumbnail']['extension'];
+                $authors = $comic['creators']['items'];
+
+                if(is_null($comic['description'])) $comic['description'] = " ";
+
+                $com = new Comic($comic['title'], $comic['description'], $thumbnail, $authors);
+            
+            }
+            getInformationOfComic($com);
+            unset($com);
         break;
 
         case "marvel:comic-authors":
+            $comicsCreators = $client->getCreatorsForComics($id);
+
+            foreach ($comicsCreators as $creator) 
+            {
+                $thumbnail = $creator['thumbnail']['path'] . $creator['thumbnail']['extension'];
+                $authors[] = new Author($creator['fullName'], $thumbnail);
+            }
+            getComicAuthors($authors);
+            unset($authors);
         break;
 
         case "exit": 
@@ -92,6 +123,38 @@ function getInformationOfCharacter($marvelCharacter)
     printf("Description: " . $marvelCharacter->getDescription() . "\n");
     printf("\n");
 }
+
+function getInformationOfCharacterComics($comics)
+{
+    printf("\n");
+    printf("Comic list of a Marvel character: \n");
+    foreach ($comics as $comic) 
+    {
+        printf($comic->getTitle() . "\n");
+    }
+    printf("\n");
+}
+
+function getInformationOfComic($comic)
+{
+    printf("\n");
+    printf("Information about a Marvel comic character: \n");
+    printf("Name: " . $comic->getTitle() . "\n");
+    printf("Description: " . $comic->getDescription() . "\n");
+    printf("\n");
+}
+
+function getComicAuthors($authors)
+{
+    printf("\n");
+    printf("Information about a comic author: \n");
+    foreach ($authors as $author) 
+    {
+        printf($author->getAuthor() . "\n");
+    }
+    printf("\n");   
+}
+
 
 
 

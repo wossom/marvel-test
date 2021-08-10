@@ -67,6 +67,6 @@ class Character
 
     public function toString()
     {
-        return "Name: " . $this->name . "Description: " . $this->description . "Numbers of comics: " . count($this->comics);
+        return "Name: " . $this->name . "Description: " . $this->description;
     }
 }
