@@ -3,6 +3,7 @@
 require_once '../models/MarvelClient.php';
 require_once '../models/Character.php';
 require_once '../models/Author.php';
+require_once('../vendor/autoload.php');
 
 $client = new MarvelClient();
 $goOut = false;
@@ -25,27 +26,16 @@ while(!$goOut) {
 
     switch($option) {
         case "marvel:characters": 
-            $characters = $client->getCharacters();
 
-            foreach ($characters as $character) 
-            {
-                $thumbnail = $character['thumbnail']['path'] . $character['thumbnail']['extension'];
-                $charactersArray[] = new Character($character['name'], $character['description'], $thumbnail, $character['comics']);
-            }
-            getListOfCharacters($charactersArray);
-            unset($charactersArray);
+            $characters = $client->getCharacters();
+            getListOfCharacters($characters);
+            unset($characters);
 
         break;
 
         case "marvel:character":
             $character = $client->getCharacter($id);
-
-            foreach ($character as $charact) 
-            {
-                $thumbnail = $charact['thumbnail']['path'] . $charact['thumbnail']['extension'];
-                $marvelCharacter = new Character($charact['name'], $charact['description'], $thumbnail, $charact['comics']);
-            }
-            getInformationOfCharacter($marvelCharacter);
+            getInformationOfCharacter($character);
             unset($marvelCharacter);
 
         break;

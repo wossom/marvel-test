@@ -2,8 +2,6 @@
 
 use GuzzleHttp\Client;
 
-require_once('../vendor/autoload.php');
-
 class MarvelClient{
     private $baseUrl = 'http://gateway.marvel.com/v1/public/';
     private $publicApiKey;
@@ -44,16 +42,28 @@ class MarvelClient{
 
         $characters = $response['data']['results'];
 
-        return $characters;
+        foreach ($characters as $character) 
+        {
+            $thumbnail = $character['thumbnail']['path'] . '.' . $character['thumbnail']['extension'];
+            $charactersArray[] = new Character($character['name'], $character['description'], $thumbnail, $character['comics']);
+        }
+
+        return $charactersArray;
     }
 
     public function getCharacter(int $id) 
     {
         $response = $this->call('characters/' . $id);
 
-        $character = $response['data']['results'];
+        $marvelCharacter = $response['data']['results'];
 
-        return $character;
+        foreach ($marvelCharacter as $character) 
+        {
+            $thumbnail = $character['thumbnail']['path'] . '.' . $character['thumbnail']['extension'];
+            $marvelCharacter = new Character($character['name'], $character['description'], $thumbnail, $character['comics']);
+        }
+
+        return $marvelCharacter;
     }
 
     public function getComicsForCharacter(int $id)
