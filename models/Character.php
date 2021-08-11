@@ -1,7 +1,5 @@
 <?php 
 
-require_once 'Comic.php';
-
 class Character
 {
     private $name;

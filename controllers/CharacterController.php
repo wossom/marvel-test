@@ -1,8 +1,8 @@
 <?php
-require_once('models/author.php');
+require_once('models/character.php');
 require_once('models/MarvelClient.php');
 
-class authorController{
+class characterController{
 
     public function characters()
     {
@@ -18,7 +18,7 @@ class authorController{
     }
 
     public function character_id()
-    {//1009351
+    {
         if(isset($_POST['id']))
         {
             $id = $_POST['id'];

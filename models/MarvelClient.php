@@ -72,25 +72,53 @@ class MarvelClient{
 
         $comics = $response['data']['results'];
 
-        return $comics;
+        foreach ($comics as $comic) 
+        {
+            $thumbnail = $comic['thumbnail']['path'] . '.' . $comic['thumbnail']['extension'];
+            $authors = $comic['creators']['items'];
+
+            if(is_null($comic['description'])) $comic['description'] = " ";
+
+            $comicsArray[] = new Comic($comic['title'], $comic['description'], $thumbnail, $authors);
+        }
+
+        return $comicsArray;
     }
 
     public function getComic(int $id) 
     {
         $response = $this->call('comics/' . $id);
 
-        $comic = $response['data']['results'];
+        $characterComic = $response['data']['results'];
 
-        return $comic;
+        foreach ($characterComic as $comic) 
+        {
+            $thumbnail = $comic['thumbnail']['path'] . '.' . $comic['thumbnail']['extension'];
+            $authors = $comic['creators']['items'];
+
+            if(is_null($comic['description'])) $comic['description'] = " ";
+
+            $com = new Comic($comic['title'], $comic['description'], $thumbnail, $authors);
+            
+        }
+
+        return $com;
     }
 
     public function getCreatorsForComics(int $id) 
     {
         $response = $this->call('comics/' . $id . '/creators');
 
-        $creators = $response['data']['results'];
+        $comicsCreators = $response['data']['results'];
 
-        return $creators;
+
+        foreach ($comicsCreators as $creator) 
+        {
+            $thumbnail = $creator['thumbnail']['path'] . '.' .  $creator['thumbnail']['extension'];
+            $authors[] = new Author($creator['fullName'], $thumbnail);
+        }
+
+        return $authors;
     }
 
 

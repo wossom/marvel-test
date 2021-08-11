@@ -2,6 +2,7 @@
 
 require_once '../models/MarvelClient.php';
 require_once '../models/Character.php';
+require_once '../models/Comic.php';
 require_once '../models/Author.php';
 require_once('../vendor/autoload.php');
 
@@ -26,7 +27,6 @@ while(!$goOut) {
 
     switch($option) {
         case "marvel:characters": 
-
             $characters = $client->getCharacters();
             getListOfCharacters($characters);
             unset($characters);
@@ -42,46 +42,19 @@ while(!$goOut) {
 
         case "marvel:character-comics":
             $characterComics = $client->getComicsForCharacter($id);
-
-            foreach ($characterComics as $characterComic) 
-            {
-                $thumbnail = $characterComic['thumbnail']['path'] . $characterComic['thumbnail']['extension'];
-                $authors = $characterComic['creators']['items'];
-
-                if(is_null($characterComic['description'])) $characterComic['description'] = " ";
-
-                $comicsArray[] = new Comic($characterComic['title'], $characterComic['description'], $thumbnail, $authors);
-            }
-            getInformationOfCharacterComics($comicsArray);
-            unset($comicsArray);
+            getInformationOfCharacterComics($characterComics);
+            unset($characterComics);
 
         break;
 
         case "marvel:comic":
             $characterComic = $client->getComic($id);
-
-            foreach ($characterComic as $comic) 
-            {
-                $thumbnail = $comic['thumbnail']['path'] . $comic['thumbnail']['extension'];
-                $authors = $comic['creators']['items'];
-
-                if(is_null($comic['description'])) $comic['description'] = " ";
-
-                $com = new Comic($comic['title'], $comic['description'], $thumbnail, $authors);
-            
-            }
-            getInformationOfComic($com);
-            unset($com);
+            getInformationOfComic($characterComic);
+            unset($characterComic);
         break;
 
         case "marvel:comic-authors":
-            $comicsCreators = $client->getCreatorsForComics($id);
-
-            foreach ($comicsCreators as $creator) 
-            {
-                $thumbnail = $creator['thumbnail']['path'] . $creator['thumbnail']['extension'];
-                $authors[] = new Author($creator['fullName'], $thumbnail);
-            }
+            $authors = $client->getCreatorsForComics($id);
             getComicAuthors($authors);
             unset($authors);
         break;
