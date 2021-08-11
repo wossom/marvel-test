@@ -5,14 +5,12 @@ class Comic
     private $title;
     private $description;
     private $thumbnail;
-    private $authors;
     
-    public function __construct(string $title, string $description , string $thumbnail, array $authors)
+    public function __construct(string $title, string $description , string $thumbnail)
     {
         $this->title = $title;
         $this->description = $description;
         $this->thumbnail = $thumbnail;
-        $this->authors = $authors;
     }
  
     public function getTitle()
@@ -47,18 +45,6 @@ class Comic
     public function setThumbnail($thumbnail)
     {
         $this->thumbnail = $thumbnail;
-
-        return $this;
-    }
-
-    public function getAuthor()
-    {
-        return $this->author;
-    }
-
-    public function setAuthor($author)
-    {
-        $this->author = $author;
 
         return $this;
     }

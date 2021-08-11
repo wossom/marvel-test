@@ -5,14 +5,12 @@ class Character
     private $name;
     private $description;
     private $thumbnail;
-    private $comics;
 
-    public function __construct(string $name, string $description, string $thumbnail, array $comics)
+    public function __construct(string $name, string $description, string $thumbnail)
     {
         $this->name = $name;
         $this->description = $description;
         $this->thumbnail = $thumbnail;
-        $this->comics = $comics;
     }
  
     public function getName()
@@ -47,18 +45,6 @@ class Character
     public function setThumbnail($thumbnail)
     {
         $this->thumbnail = $thumbnail;
-
-        return $this;
-    }
-
-    public function getComics()
-    {
-        return $this->comics;
-    }
-
-    public function setComics($comics)
-    {
-        $this->comics = $comics;
 
         return $this;
     }

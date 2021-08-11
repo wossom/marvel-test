@@ -27,7 +27,8 @@ while(!$goOut) {
 
     switch($option) {
         case "marvel:characters": 
-            try {
+            try 
+            {
                 $characters = $client->getCharacters();
                 getListOfCharacters($characters);
                 unset($characters);
@@ -55,7 +56,7 @@ while(!$goOut) {
             try 
             {
                 $characterComics = $client->getComicsForCharacter($id);
-                if (is_array($values) || is_object($values))
+                if (is_array($characterComics) || is_object($characterComics))
                 {
                     getInformationOfCharacterComics($characterComics);
                     unset($characterComics);
@@ -85,7 +86,7 @@ while(!$goOut) {
         case "marvel:comic-authors":
             try{
                 $authors = $client->getCreatorsForComics($id);
-                if (is_array($values) || is_object($values))
+                if (is_array($authors) || is_object($authors))
                 {
                     getComicAuthors($authors);
                     unset($authors);

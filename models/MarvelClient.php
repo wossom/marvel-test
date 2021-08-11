@@ -46,7 +46,7 @@ class MarvelClient{
             foreach ($characters as $character) 
             {
                 $thumbnail = $character['thumbnail']['path'] . '.' . $character['thumbnail']['extension'];
-                $charactersArray[] = new Character($character['name'], $character['description'], $thumbnail, $character['comics']);
+                $charactersArray[] = new Character($character['name'], $character['description'], $thumbnail);
             }
         }catch (Exception $e) 
         {
@@ -67,7 +67,7 @@ class MarvelClient{
             foreach ($marvelCharacter as $character) 
             {
                 $thumbnail = $character['thumbnail']['path'] . '.' . $character['thumbnail']['extension'];
-                $marvelCharacter = new Character($character['name'], $character['description'], $thumbnail, $character['comics']);
+                $marvelCharacter = new Character($character['name'], $character['description'], $thumbnail);
             }
         }
         catch (Exception $e) {
@@ -88,11 +88,10 @@ class MarvelClient{
             foreach ($comics as $comic) 
             {
                 $thumbnail = $comic['thumbnail']['path'] . '.' . $comic['thumbnail']['extension'];
-                $authors = $comic['creators']['items'];
 
                 if(is_null($comic['description'])) $comic['description'] = " ";
 
-                $comicsArray[] = new Comic($comic['title'], $comic['description'], $thumbnail, $authors);
+                $comicsArray[] = new Comic($comic['title'], $comic['description'], $thumbnail);
             }
         }
         catch (Exception $e) 
@@ -114,11 +113,10 @@ class MarvelClient{
             foreach ($characterComic as $comic) 
             {
                 $thumbnail = $comic['thumbnail']['path'] . '.' . $comic['thumbnail']['extension'];
-                $authors = $comic['creators']['items'];
 
                 if(is_null($comic['description'])) $comic['description'] = " ";
 
-                $com = new Comic($comic['title'], $comic['description'], $thumbnail, $authors);
+                $com = new Comic($comic['title'], $comic['description'], $thumbnail);
                 
             }
         }
