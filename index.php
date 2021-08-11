@@ -2,6 +2,7 @@
 session_start();
 
 require_once 'vendor/autoload.php';
+require_once 'helpers/utils.php';
 require_once 'config/parameters.php';
 require_once 'models/Character.php';
 require_once 'views/layout/sidebar.php';

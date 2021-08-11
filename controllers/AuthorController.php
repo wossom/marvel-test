@@ -12,18 +12,29 @@ class authorController{
         require_once 'views/character/characters.php';
     }
 
-    public function character_id()
+    public function character()
     {
-        $marvelClient = new MarvelClient();
-        $character = $marvelClient->getCharacter(1009351);
-
-        if(is_null($character)){
-            $_SESSION['chargedCharacterd'] = 'failed';
-        }else{
-            $_SESSION['chargedCharacterd'] = 'success';
-        }
-
         require_once 'views/character/characterId.php';
+    }
+
+    public function character_id()
+    {//1009351
+        if(isset($_POST['id']))
+        {
+            $id = $_POST['id'];
+            $marvelClient = new MarvelClient();
+            $character = $marvelClient->getCharacter($id);
+
+            if(is_null($character)){
+                $_SESSION['chargedCharacter'] = 'failed';
+            }else{
+                $_SESSION['chargedCharacter'] = 'success';
+            }
+        }else
+        {
+            $_SESSION['chargedCharacter'] = 'failed';
+        }
+        require_once 'views/character/showCharacter.php';
     }
 
 }
