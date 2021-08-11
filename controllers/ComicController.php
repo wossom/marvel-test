@@ -21,43 +21,63 @@ class comicController{
     }
 
     public function comic_characters_id()
-    {//1009351
+    {
         if(isset($_POST['id']))
         {
             $id = $_POST['id'];
-            $marvelClient = new MarvelClient();
-            $characters = $marvelClient->getComicsForCharacter($id);
 
-            if(is_null($characters))
+            if( is_numeric($id) )
             {
-                $_SESSION['chargedCharacter'] = 'failed';
+                $marvelClient = new MarvelClient();
+
+                $characters = $marvelClient->getComicsForCharacter($id);
+
+                if(is_null($characters))
+                {
+                    $_SESSION['chargedCharacter'] = 'failed';
+                }
+                else
+                {
+                    $_SESSION['chargedCharacter'] = 'success';
+                }
             }
             else
             {
-                $_SESSION['chargedCharacter'] = 'success';
+                $_SESSION['chargedCharacter'] = 'failed';
             }
-        }else
+        }
+        else
         {
             $_SESSION['chargedCharacter'] = 'failed';
         }
+
         require_once 'views/comics/showComicCharacters.php';
     }
 
     public function comic_id()
-    {//1009351
+    {
         if(isset($_POST['id']))
         {
             $id = $_POST['id'];
-            $marvelClient = new MarvelClient();
-            $comic = $marvelClient->getComic($id);
 
-            if(is_null($comic))
+            if( is_numeric($id) )
             {
-                $_SESSION['chargedCharacter'] = 'failed';
+                $marvelClient = new MarvelClient();
+
+                $comic = $marvelClient->getComic($id);
+
+                if(is_null($comic))
+                {
+                    $_SESSION['chargedCharacter'] = 'failed';
+                }
+                else
+                {
+                    $_SESSION['chargedCharacter'] = 'success';
+                }
             }
             else
             {
-                $_SESSION['chargedCharacter'] = 'success';
+                $_SESSION['chargedCharacter'] = 'failed';
             }
         }else
         {
@@ -67,20 +87,29 @@ class comicController{
     }
 
     public function comic_authors_id()
-    {//1009351
+    {
         if(isset($_POST['id']))
         {
             $id = $_POST['id'];
-            $marvelClient = new MarvelClient();
-            $authors = $marvelClient->getCreatorsForComics($id);
 
-            if(is_null($authors))
+            if( is_numeric($id) )
             {
-                $_SESSION['chargedCharacter'] = 'failed';
+                $marvelClient = new MarvelClient();
+                
+                $authors = $marvelClient->getCreatorsForComics($id);
+
+                if(is_null($authors))
+                {
+                    $_SESSION['chargedCharacter'] = 'failed';
+                }
+                else
+                {
+                    $_SESSION['chargedCharacter'] = 'success';
+                }
             }
             else
             {
-                $_SESSION['chargedCharacter'] = 'success';
+                $_SESSION['chargedCharacter'] = 'failed';
             }
         }else
         {

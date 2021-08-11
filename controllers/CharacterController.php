@@ -22,13 +22,22 @@ class characterController{
         if(isset($_POST['id']))
         {
             $id = $_POST['id'];
-            $marvelClient = new MarvelClient();
-            $character = $marvelClient->getCharacter($id);
+            
+            if( is_numeric($id) )
+            {
+                $marvelClient = new MarvelClient();
 
-            if(is_null($character)){
+                $character = $marvelClient->getCharacter($id);
+    
+                if(is_null($character)){
+                    $_SESSION['chargedCharacter'] = 'failed';
+                }else{
+                    $_SESSION['chargedCharacter'] = 'success';
+                }
+            }
+            else
+            {
                 $_SESSION['chargedCharacter'] = 'failed';
-            }else{
-                $_SESSION['chargedCharacter'] = 'success';
             }
         }else
         {

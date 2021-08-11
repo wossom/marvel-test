@@ -63,8 +63,8 @@ class Character
         return $this;
     }
 
-    public function toString()
+    public function getInformation()
     {
-        return "Name: " . $this->name . "Description: " . $this->description;
+        return "Name: " . $this->name . "\n" . "Description: " . $this->description;
     }
 }

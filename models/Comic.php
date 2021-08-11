@@ -62,4 +62,9 @@ class Comic
 
         return $this;
     }
+
+    public function getInformation()
+    {
+        return "Title: " . $this->title . "\n" . "Description: " . $this->description;
+    }
 }

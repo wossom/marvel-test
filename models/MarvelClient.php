@@ -38,29 +38,40 @@ class MarvelClient{
 
     public function getCharacters()
     {
-        $response = $this->call('characters');
+        try{
+            $response = $this->call('characters');
 
-        $characters = $response['data']['results'];
+            $characters = $response['data']['results'];
 
-        foreach ($characters as $character) 
+            foreach ($characters as $character) 
+            {
+                $thumbnail = $character['thumbnail']['path'] . '.' . $character['thumbnail']['extension'];
+                $charactersArray[] = new Character($character['name'], $character['description'], $thumbnail, $character['comics']);
+            }
+        }catch (Exception $e) 
         {
-            $thumbnail = $character['thumbnail']['path'] . '.' . $character['thumbnail']['extension'];
-            $charactersArray[] = new Character($character['name'], $character['description'], $thumbnail, $character['comics']);
+            $charactersArray = null;
         }
 
         return $charactersArray;
     }
 
-    public function getCharacter(int $id) 
+    public function getCharacter(int $id)
     {
-        $response = $this->call('characters/' . $id);
-
-        $marvelCharacter = $response['data']['results'];
-
-        foreach ($marvelCharacter as $character) 
+        try
         {
-            $thumbnail = $character['thumbnail']['path'] . '.' . $character['thumbnail']['extension'];
-            $marvelCharacter = new Character($character['name'], $character['description'], $thumbnail, $character['comics']);
+            $response = $this->call('characters/' . $id);
+
+            $marvelCharacter = $response['data']['results'];
+
+            foreach ($marvelCharacter as $character) 
+            {
+                $thumbnail = $character['thumbnail']['path'] . '.' . $character['thumbnail']['extension'];
+                $marvelCharacter = new Character($character['name'], $character['description'], $thumbnail, $character['comics']);
+            }
+        }
+        catch (Exception $e) {
+            $marvelCharacter = null;
         }
 
         return $marvelCharacter;
@@ -68,18 +79,25 @@ class MarvelClient{
 
     public function getComicsForCharacter(int $id)
     {
-        $response = $this->call('characters/' . $id . '/comics');
-
-        $comics = $response['data']['results'];
-
-        foreach ($comics as $comic) 
+        try
         {
-            $thumbnail = $comic['thumbnail']['path'] . '.' . $comic['thumbnail']['extension'];
-            $authors = $comic['creators']['items'];
+            $response = $this->call('characters/' . $id . '/comics');
 
-            if(is_null($comic['description'])) $comic['description'] = " ";
+            $comics = $response['data']['results'];
 
-            $comicsArray[] = new Comic($comic['title'], $comic['description'], $thumbnail, $authors);
+            foreach ($comics as $comic) 
+            {
+                $thumbnail = $comic['thumbnail']['path'] . '.' . $comic['thumbnail']['extension'];
+                $authors = $comic['creators']['items'];
+
+                if(is_null($comic['description'])) $comic['description'] = " ";
+
+                $comicsArray[] = new Comic($comic['title'], $comic['description'], $thumbnail, $authors);
+            }
+        }
+        catch (Exception $e) 
+        {
+            $comicsArray = null;
         }
 
         return $comicsArray;
@@ -87,35 +105,48 @@ class MarvelClient{
 
     public function getComic(int $id) 
     {
-        $response = $this->call('comics/' . $id);
-
-        $characterComic = $response['data']['results'];
-
-        foreach ($characterComic as $comic) 
+        try
         {
-            $thumbnail = $comic['thumbnail']['path'] . '.' . $comic['thumbnail']['extension'];
-            $authors = $comic['creators']['items'];
+            $response = $this->call('comics/' . $id);
 
-            if(is_null($comic['description'])) $comic['description'] = " ";
+            $characterComic = $response['data']['results'];
 
-            $com = new Comic($comic['title'], $comic['description'], $thumbnail, $authors);
-            
+            foreach ($characterComic as $comic) 
+            {
+                $thumbnail = $comic['thumbnail']['path'] . '.' . $comic['thumbnail']['extension'];
+                $authors = $comic['creators']['items'];
+
+                if(is_null($comic['description'])) $comic['description'] = " ";
+
+                $com = new Comic($comic['title'], $comic['description'], $thumbnail, $authors);
+                
+            }
+        }
+        catch (Exception $e) 
+        {
+            $com = null;
         }
 
         return $com;
     }
 
     public function getCreatorsForComics(int $id) 
-    {
-        $response = $this->call('comics/' . $id . '/creators');
+    {   
+        try{
+            $response = $this->call('comics/' . $id . '/creators');
 
-        $comicsCreators = $response['data']['results'];
+            $comicsCreators = $response['data']['results'];
 
 
-        foreach ($comicsCreators as $creator) 
+            foreach ($comicsCreators as $creator) 
+            {
+                $thumbnail = $creator['thumbnail']['path'] . '.' .  $creator['thumbnail']['extension'];
+                $authors[] = new Author($creator['fullName'], $thumbnail);
+            }
+        }
+        catch (Exception $e) 
         {
-            $thumbnail = $creator['thumbnail']['path'] . '.' .  $creator['thumbnail']['extension'];
-            $authors[] = new Author($creator['fullName'], $thumbnail);
+            $authors = null;
         }
 
         return $authors;

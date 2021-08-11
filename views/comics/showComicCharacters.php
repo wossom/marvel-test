@@ -2,8 +2,8 @@
 if(isset($_SESSION['chargedCharacter']) && $_SESSION['chargedCharacter'] == 'failed'){ ?>
     <div class="container">
         <div class="row">
-            <div class="col-md-4">
-                <h1> Ups.. Comics authors hasn't been found </h1>
+            <div class="col-md-8 mx-auto">
+                <h1 class="text-light"> Ups.. Comics characters hasn't been found </h1>
             </div>          
         </div>
     </div>
@@ -12,7 +12,7 @@ if(isset($_SESSION['chargedCharacter']) && $_SESSION['chargedCharacter'] == 'fai
 }else if(isset($_SESSION['chargedCharacter']) && $_SESSION['chargedCharacter'] == 'success'){
 ?>
 
-    <div class="container">
+    <div class="container mb-5">
         <div class="row row-cols-1 row-cols-md-3 g-4">
             <?php foreach ($characters as $character) 
             { ?>

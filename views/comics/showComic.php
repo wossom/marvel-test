@@ -2,8 +2,8 @@
 if(isset($_SESSION['chargedCharacter']) && $_SESSION['chargedCharacter'] == 'failed'){ ?>
     <div class="container">
         <div class="row">
-            <div class="col-md-4">
-                <h1> Ups.. Comic hasn't been found </h1>
+            <div class="col-md-8 mx-auto">
+                <h1 class="text-light"> Ups.. Comic hasn't been found </h1>
             </div>          
         </div>
     </div>
@@ -12,12 +12,12 @@ if(isset($_SESSION['chargedCharacter']) && $_SESSION['chargedCharacter'] == 'fai
 }else if(isset($_SESSION['chargedCharacter']) && $_SESSION['chargedCharacter'] == 'success'){
 ?>
 
-    <div class="container">
+    <div class="container mb-5">
         <div class="row">
             <div class="col-md-4">
                 <img src="<?=$comic->getThumbnail()?>" alt="" class="img-fluid rounded">
                 <br><br>
-                <a href="<?=base_url?>comic/comic_id" class="btn btn-outline-danger btn-block d-grid gap-2 col mx-auto">Return</a>
+                <a href="<?=base_url?>comic/comic" class="btn btn-outline-danger btn-block d-grid gap-2 col mx-auto">Return</a>
 
             </div>
 

@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container mb-5">
     <div class="row row-cols-1 row-cols-md-3 g-4">
         <?php foreach ($characters as $character) 
         { ?>
