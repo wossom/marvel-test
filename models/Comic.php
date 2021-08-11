@@ -3,13 +3,17 @@
 class Comic
 {
     private $title;
+
     private $description;
+
     private $thumbnail;
     
     public function __construct(string $title, string $description , string $thumbnail)
     {
         $this->title = $title;
+
         $this->description = $description;
+        
         $this->thumbnail = $thumbnail;
     }
  

@@ -3,13 +3,17 @@
 class Character
 {
     private $name;
+
     private $description;
+
     private $thumbnail;
 
     public function __construct(string $name, string $description, string $thumbnail)
     {
         $this->name = $name;
+
         $this->description = $description;
+        
         $this->thumbnail = $thumbnail;
     }
  

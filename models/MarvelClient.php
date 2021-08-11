@@ -4,12 +4,15 @@ use GuzzleHttp\Client;
 
 class MarvelClient{
     private $baseUrl = 'http://gateway.marvel.com/v1/public/';
+
     private $publicApiKey;
+
     private $privateApiKey;
 
     public function __construct()
     {
         $this->publicApiKey = '1ac7649ee7d6409d32cf8887d26be208';
+
         $this->privateApiKey = '0fde4a9ceeb91063d3f80fe0b1e1f0d6a9f08de0';
     }
 
@@ -46,6 +49,7 @@ class MarvelClient{
             foreach ($characters as $character) 
             {
                 $thumbnail = $character['thumbnail']['path'] . '.' . $character['thumbnail']['extension'];
+
                 $charactersArray[] = new Character($character['name'], $character['description'], $thumbnail);
             }
         }catch (Exception $e) 
@@ -67,6 +71,7 @@ class MarvelClient{
             foreach ($marvelCharacter as $character) 
             {
                 $thumbnail = $character['thumbnail']['path'] . '.' . $character['thumbnail']['extension'];
+
                 $marvelCharacter = new Character($character['name'], $character['description'], $thumbnail);
             }
         }
@@ -139,6 +144,7 @@ class MarvelClient{
             foreach ($comicsCreators as $creator) 
             {
                 $thumbnail = $creator['thumbnail']['path'] . '.' .  $creator['thumbnail']['extension'];
+                
                 $authors[] = new Author($creator['fullName'], $thumbnail);
             }
         }

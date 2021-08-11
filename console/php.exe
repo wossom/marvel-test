@@ -104,8 +104,6 @@ while(!$goOut) {
         case "exit": 
             $goOut = true;
         break;
-
-        
     }
 }
 

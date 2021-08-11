@@ -7,33 +7,50 @@ require_once 'config/parameters.php';
 require_once 'views/layout/sidebar.php';
 
 
-function show_error(){
+function show_error()
+{
 	$error = new errorController();
+
 	$error->index();
 }
 
-if(isset($_GET['controller'])){
+if(isset($_GET['controller']))
+{
 	$nombre_controlador = $_GET['controller'].'Controller';
-}else if(!isset($_GET['controller']) && isset($_GET['action'])){
+}
+else if(!isset($_GET['controller']) && isset($_GET['action']))
+{
 	$nombre_controlador = controller_default();
-}else{
+}
+else
+{
 	show_error();
+
 	exit();
 }
 
-if(class_exists($nombre_controlador)){	
+if(class_exists($nombre_controlador))
+{	
 	$controlador = new $nombre_controlador();
 
-	if(isset($_GET['action']) && method_exists($controlador, $_GET['action'])){
+	if(isset($_GET['action']) && method_exists($controlador, $_GET['action']))
+	{
 		$action = $_GET['action'];
+
 		$controlador->$action();
-	}else if(!isset($_GET['controller']) && isset($_GET['action'])){
+	}
+	else if(!isset($_GET['controller']) && isset($_GET['action']))
+	{
 		$default = action_default();
 		$controlador->$default();
-	}else{
+	}
+	else
+	{
 		show_error();
 	}
-}else{
+}
+else
+{
 	show_error();
 }
 

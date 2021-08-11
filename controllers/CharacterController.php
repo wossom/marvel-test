@@ -7,6 +7,7 @@ class characterController{
     public function characters()
     {
         $marvelClient = new MarvelClient();
+        
         $characters = $marvelClient->getCharacters();
 
         require_once 'views/character/characters.php';
@@ -29,9 +30,12 @@ class characterController{
 
                 $character = $marvelClient->getCharacter($id);
     
-                if(is_null($character)){
+                if(is_null($character))
+                {
                     $_SESSION['chargedCharacter'] = 'failed';
-                }else{
+                }
+                else
+                {
                     $_SESSION['chargedCharacter'] = 'success';
                 }
             }
