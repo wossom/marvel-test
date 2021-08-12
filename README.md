@@ -26,7 +26,9 @@ APLICACIÓN DE CONSOLA
 
 -Para ejecutar la aplicación de consola debemos situarnos en la terminal en la raíz del proyecto.
 
--Luego, debemos ejecutar el comando "docker ps" para ver el contenedor que hemos generado anteriormente
+-Luego, para ver el contenedor que hemos generado anteriormente debemos ejecutar el siguiente comando:
+
+    docker ps
 
 -Una vez localizado el contenedor, debemos coger el container id y ejecutarlo para poder acceder al contenedor y ejecutar la aplicación de consola:
 
