@@ -40,10 +40,28 @@ APLICACIÓN DE CONSOLA
 
     php php marvelConsole.exe
 
+## Ejecutando las pruebas 
+
+Funcionamiento aplicación de consola:
+
+-Vamos a encontrarnos las siguientes opciones:
+
+    marvel:characters
+    marvel:character <id>
+    marvel:character-comics <id>
+    marvel:comic <id>
+    marvel:comic-authors <id>
+
+En las opciones que veamos <id> se deberá indicar un numero identificativo para que la aplicación busque en la API de Marvel resultados que coincidan con el id. Indico ejemplos de posibles opciones para la consola de aplicación:
+
+    marvel:characters
+    marvel:character 1009351
+    marvel:character-comics 1009351
+    marvel:comic 180
+    marvel:comic-authors 183
+
 
 ## Construido con 🛠️
-
-_Menciona las herramientas que utilizaste para crear tu proyecto_
 
 * [PHP](https://www.php.net/manual/es/intro-whatis.php)
 * [Bootstrap](https://getbootstrap.com/docs/5.1/getting-started/introduction/) 
