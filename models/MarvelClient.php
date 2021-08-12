@@ -122,7 +122,6 @@ class MarvelClient{
                 if(is_null($comic['description'])) $comic['description'] = " ";
 
                 $com = new Comic($comic['title'], $comic['description'], $thumbnail);
-                
             }
         }
         catch (Exception $e) 

@@ -16,11 +16,11 @@ function show_error()
 
 if(isset($_GET['controller']))
 {
-	$nombre_controlador = $_GET['controller'].'Controller';
+	$name_controller = $_GET['controller'].'Controller';
 }
 else if(!isset($_GET['controller']) && isset($_GET['action']))
 {
-	$nombre_controlador = controller_default();
+	$name_controller = controller_default();
 }
 else
 {
@@ -29,20 +29,20 @@ else
 	exit();
 }
 
-if(class_exists($nombre_controlador))
+if(class_exists($name_controller))
 {	
-	$controlador = new $nombre_controlador();
+	$controller = new $name_controller();
 
-	if(isset($_GET['action']) && method_exists($controlador, $_GET['action']))
+	if(isset($_GET['action']) && method_exists($controller, $_GET['action']))
 	{
 		$action = $_GET['action'];
 
-		$controlador->$action();
+		$controller->$action();
 	}
 	else if(!isset($_GET['controller']) && isset($_GET['action']))
 	{
 		$default = action_default();
-		$controlador->$default();
+		$controller->$default();
 	}
 	else
 	{
