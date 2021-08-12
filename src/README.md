@@ -30,7 +30,7 @@ APLICACIÓN DE CONSOLA
 
     docker exec -it {CONTAINER ID} /bin/bash
 
-    Ejempolo: docker exec -it 59aa922169b0 /bin/bash
+    Ejemplo: docker exec -it 59aa922169b0 /bin/bash
 
 -Después de haber accedido al contenedor, nos dirijimos al directorio "console":
 
@@ -38,7 +38,7 @@ APLICACIÓN DE CONSOLA
 
 -Por último ejecutamos el comando php junto al nombre del fichero con la extensión para poder ejecutar la aplicación:
 
-    php php marvelConsole.exe
+    php marvelConsole.exe
 
 ## Ejecutando las pruebas 
 
@@ -52,7 +52,7 @@ Funcionamiento aplicación de consola:
     marvel:comic <id>
     marvel:comic-authors <id>
 
-En las opciones que veamos <id> se deberá indicar un numero identificativo para que la aplicación busque en la API de Marvel resultados que coincidan con el id. Indico ejemplos de posibles opciones para la consola de aplicación:
+-En las opciones que veamos <id> se deberá indicar un numero identificativo para que la aplicación busque en la API de Marvel resultados que coincidan con el id. Indico ejemplos de posibles opciones para la consola de aplicación:
 
     marvel:characters
     marvel:character 1009351
