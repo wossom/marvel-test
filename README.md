@@ -16,6 +16,8 @@ Marvel app
 
     docker-compose build
 
+    docker network create marvel_network
+
     docker-compose up
 
 -Luego vamos a un navegador, indicamos la dirección http://localhost:8080/ y podemos visualizar el proyecto
