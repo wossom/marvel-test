@@ -6,7 +6,7 @@
 
         <div class="col">
 
-            <form action="<?=base_url?>comic/comic_authors_id" method="POST" class="p-3">
+            <form action="<?=base_url?>controller=comic&action=comic_authors_id" method="POST" class="p-3">
 
                 <div class="mb-3">
 

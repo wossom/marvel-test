@@ -6,13 +6,13 @@
 
         <div class="col">
 
-            <form action="<?=base_url?>comic/comic_characters_id" method="POST" class="p-3">
+            <form action="<?=base_url?>controller=comic&action=comic_id" method="POST" class="p-3">
 
                 <div class="mb-3">
 
-                    <label class="form-label"> Comic character id: </label>
+                    <label class="form-label"> Comic id: </label>
 
-                    <input type="text" class="form-control" name="id" placeholder="e.g.1009351" required>
+                    <input type="text" class="form-control" name="id" placeholder="e.g.180" required>
 
                 </div>
 

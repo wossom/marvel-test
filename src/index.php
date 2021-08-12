@@ -20,7 +20,7 @@ if(isset($_GET['controller']))
 }
 else if(!isset($_GET['controller']) && isset($_GET['action']))
 {
-	$name_controller = controller_default();
+	$name_controller = $controller_default;
 }
 else
 {
@@ -41,7 +41,7 @@ if(class_exists($name_controller))
 	}
 	else if(!isset($_GET['controller']) && isset($_GET['action']))
 	{
-		$default = action_default();
+		$default = $action_default;
 		$controller->$default();
 	}
 	else
