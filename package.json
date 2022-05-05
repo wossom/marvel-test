@@ -1,0 +1,23 @@
+{
+  "name": "marvel-test",
+  "version": "1.0.0",
+  "description": "project marvel-test",
+  "main": "index.js",
+  "dependencies": {
+    "cypress": "^9.6.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "npx cypress run"
+  },
+  "repository":{
+    "type": "git",
+    "url": "https://github.com/alvarodds/marvel-test"
+  },
+  "author": "alvarodds",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alvarodds/marvel-test/issues"
+  },
+  "homepage": "https://github.com/alvarodds/marvel-test#readme"
+}
