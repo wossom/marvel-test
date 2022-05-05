@@ -6,7 +6,7 @@
 
     <a class="navbar-brand" href="#">
 
-      <img src="../assets/images/marvel.png" class="ms-4" alt="" height="50">
+      <img src="../assets/images/marvel.png" class="ms-4" alt="" height="50" testID="marvel-logo">
 
     </a>
 
@@ -16,31 +16,31 @@
 
             <li class="nav-item mx-3">
 
-                <a href="<?=base_url?>controller=character&action=characters" class="nav-link characters">Characters</a>
+                <a href="<?=base_url?>controller=character&action=characters" class="nav-link characters" testID="characters-link">Characters</a>
 
             </li>
 
             <li class="nav-item mx-3">
 
-                <a href="<?=base_url?>controller=character&action=character" class="nav-link character" >Find Character</a>
+                <a href="<?=base_url?>controller=character&action=character" class="nav-link character" testID="findCharacter-link">Find Character</a>
 
             </li>
 
             <li class="nav-item mx-3">
 
-                <a href="<?=base_url?>controller=comic&action=comic" class="nav-link comic">Find comic</a>
+                <a href="<?=base_url?>controller=comic&action=comic" class="nav-link comic" testID="findComic-link">Find comic</a>
 
             </li>
 
             <li class="nav-item mx-3">
 
-                <a href="<?=base_url?>controller=comic&action=comic_characters" class="nav-link comic_characters">Character comic</a>
+                <a href="<?=base_url?>controller=comic&action=comic_characters" class="nav-link comic_characters" testID="characterComic-link">Character comic</a>
 
             </li>
 
             <li class="nav-item mx-3">
 
-                <a href="<?=base_url?>controller=comic&action=comic_authors" class="nav-link comic_authors">Comic authors</a>
+                <a href="<?=base_url?>controller=comic&action=comic_authors" class="nav-link comic_authors" testID="comicAuthor-link">Comic authors</a>
 
             </li>
 
