@@ -1,0 +1,166 @@
+<?php
+
+require_once '../models/MarvelClient.php';
+require_once '../models/Character.php';
+require_once '../models/Comic.php';
+require_once '../models/Author.php';
+require_once('../vendor/autoload.php');
+
+$client = new MarvelClient();
+$goOut = false;
+
+while(!$goOut) {
+    printf("\n");
+    printf("marvel:characters\n");
+	printf("marvel:character <id>\n");
+    printf("marvel:character-comics <id>\n");
+    printf("marvel:comic <id>\n");
+    printf("marvel:comic-authors <id>\n");
+    printf("exit\n");
+    $option = readline("Select a option: \n");
+
+    if(str_word_count($option) == 2 ){
+        $option = explode(" ", $option);
+        $id = $option[1];
+        $option = $option[0];
+    }
+
+    switch($option) {
+        case "marvel:characters": 
+            try 
+            {
+                $characters = $client->getCharacters();
+                getListOfCharacters($characters);
+                unset($characters);
+            } 
+            catch (Exception $e) {
+                getError();
+            }
+        break;
+
+        case "marvel:character":
+            try 
+            {
+                $character = $client->getCharacter($id);
+                getInformationOfCharacter($character);
+                unset($marvelCharacter);
+            }
+            catch (Exception $e) 
+            {
+                getError();
+            }
+
+        break;
+
+        case "marvel:character-comics":
+            try 
+            {
+                $characterComics = $client->getComicsForCharacter($id);
+                if (is_array($characterComics) || is_object($characterComics))
+                {
+                    getInformationOfCharacterComics($characterComics);
+                    unset($characterComics);
+                } else{
+                    getError();
+                }
+            }
+            catch (Exception $e) 
+            {
+                getError();
+            }
+
+        break;
+
+        case "marvel:comic":
+            try{
+                $characterComic = $client->getComic($id);
+                getInformationOfComic($characterComic);
+                unset($characterComic);
+            }
+            catch (Exception $e) 
+            {
+                getError();
+            }
+        break;
+
+        case "marvel:comic-authors":
+            try{
+                $authors = $client->getCreatorsForComics($id);
+                if (is_array($authors) || is_object($authors))
+                {
+                    getComicAuthors($authors);
+                    unset($authors);
+                }
+                else{
+                    getError();
+                }
+            }
+            catch (Exception $e) 
+            {
+                getError();
+            }
+        break;
+
+        case "exit": 
+            $goOut = true;
+        break;
+    }
+}
+
+function getError(){
+    echo "Something went wrong... Please try it again \n";
+}
+
+function getListOfCharacters($charactersArray)
+{
+    printf("\n");
+    printf("List of Marvel Characters: \n");
+    foreach ($charactersArray as $character) 
+    {
+        printf($character->getName() . "\n");
+    }
+    printf("\n");
+}
+
+function getInformationOfCharacter($marvelCharacter)
+{
+    printf("\n");
+    printf("Information about a Marvel character: \n");
+    printf($marvelCharacter->getInformation() . "\n");
+    printf("\n");
+}
+
+function getInformationOfCharacterComics($comics)
+{
+    printf("\n");
+    printf("Comic list of a Marvel character: \n");
+    foreach ($comics as $comic) 
+    {
+        printf($comic->getTitle() . "\n");
+    }
+    printf("\n");
+}
+
+function getInformationOfComic($comic)
+{
+    printf("\n");
+    printf("Information about a Marvel comic character: \n");
+    printf($comic->getInformation() . "\n");
+    printf("\n");
+}
+
+function getComicAuthors($authors)
+{
+    printf("\n");
+    printf("Information about a comic author: \n");
+    foreach ($authors as $author) 
+    {
+        printf($author->getAuthor() . "\n");
+    }
+    printf("\n");   
+}
+
+
+
+
+?>

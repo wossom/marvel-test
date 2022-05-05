@@ -1,46 +1,71 @@
-# Marvel Client
+# Título del Proyecto
 
-Our company want to create a console app and a web client to retrieve information about Marvel Characters (we are big fans).
+Marvel app
 
-We want a console application that has the next commands:
+### Pre-requisitos 📋
 
-- `marvel:characters`. Lists all the Marvel characters
-- `marvel:character <id>`. Shows information about a single Marvel character.
-- `marvel:character-comics <id>`. Shows the comics of a single Marvel character.
-- `marvel:comic <id>`. Shows information about a single Marvel comic.
-- `marvel:comic-authors <id>`. Shows the authors of a single Marvel comic.
+-Tener instalado Docker y que se esté ejecutando.
 
-Also, we want a web version of this client, so we want the next pages:
+### Instalación 🔧
 
-- `/characters`. Shows a list will marvel characters
-- `/characters/<id>`. Shows information about a single Marvel character.
-- `/characters/<id>/comics`. Shows the comics of a single Marvel character.
-- `/comics/<id>`. Shows information about a single Marvel comic.
-- `/comics/<id>/authors`. Shows the authors of a single Marvel comic.
+-Debemos descargar el repositorio de github.
 
-All this content will be rendered in HTML. You can use the domain `http://marvel.wossom.com/`.
+-Una vez descargado, ubicamos el proyecto en la ubicación que deseemos y abrimos el proyecto en la terminal de comandos de nuestro ordenador.
 
-You can get all the information related with Marvel from their [public API](https://developer.marvel.com/docs).
+-Una vez estemos en la raíz del proyecto, para poder obtener la imagen y ver la aplicación web debemos ejecutar los siguientes comandos:
 
-## You must
-- Ensure that you reuse as much code as you can in an appropriate manner.
-- Validate all the inputs, both console and web.
-- Handle properly errors, from the API, the console input and the web.
+    docker-compose build
 
-## You should
-- Follow PSR-12 standards.
-- Ensure your code will follow as many SOLID principles as can.
-- Your code is easy to understand how it works and is easier to work with.
+    docker network create marvel_network
 
-## What we value the most?
-- Understandable code.
-- Usage of known patterns.
-- Good naming.
-- SOLID principles.
-- Automated testing.
+    docker-compose up
 
-## Extra
-- Pagination on the list views
-- Ordering on the list views
-- Add user and password to access to the web views
+-Luego vamos a un navegador, indicamos la dirección http://localhost:8080/ y podemos visualizar el proyecto
 
+APLICACIÓN DE CONSOLA
+
+-Para ejecutar la aplicación de consola debemos situarnos en la terminal en la raíz del proyecto.
+
+-Luego, para ver el contenedor que hemos generado anteriormente debemos ejecutar el siguiente comando:
+
+    docker ps
+
+-Una vez localizado el contenedor, debemos coger el container id y ejecutarlo para poder acceder al contenedor y ejecutar la aplicación de consola:
+
+    docker exec -it {CONTAINER ID} /bin/bash
+
+    Ejemplo: docker exec -it 59aa922169b0 /bin/bash
+
+-Después de haber accedido al contenedor, nos dirijimos al directorio "console":
+
+    cd console
+
+-Por último ejecutamos el comando php junto al nombre del fichero con la extensión para poder ejecutar la aplicación:
+
+    php marvelConsole.exe
+
+## Ejecutando las pruebas 
+
+Funcionamiento aplicación de consola:
+
+-Vamos a encontrarnos las siguientes opciones:
+
+    marvel:characters
+    marvel:character <id>
+    marvel:character-comics <id>
+    marvel:comic <id>
+    marvel:comic-authors <id>
+
+-En las opciones que veamos <id> se deberá indicar un numero identificativo para que la aplicación busque en la API de Marvel resultados que coincidan con el id. Indico ejemplos de posibles opciones para la consola de aplicación:
+
+    marvel:characters
+    marvel:character 1009351
+    marvel:character-comics 1009351
+    marvel:comic 180
+    marvel:comic-authors 183
+
+
+## Construido con 🛠️
+
+* [PHP](https://www.php.net/manual/es/intro-whatis.php)
+* [Bootstrap](https://getbootstrap.com/docs/5.1/getting-started/introduction/) 

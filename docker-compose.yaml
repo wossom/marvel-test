@@ -1,0 +1,17 @@
+version: '3'
+services:
+    php:
+        build: .
+        volumes:
+            - ./src:/var/www/html
+        container_name: php-server
+        restart: always
+        ports:
+            - "8080:80"
+        networks:
+            - marvel
+
+networks:
+    marvel:
+        external:
+            name: marvel_network
